@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> :3 </title>
+    <style>
+        h1 {
+            font-size: 30px;
+        }
+
+        body {
+            font-family:'Courier New';
+            margin: 10px;
+            background-color: lightblue;
+        }
+
+        button, input, canvas, textarea {
+            margin-top: 10px;
+        }
+
+        canvas, textarea {
+            width: 300px;
+            height: auto;
+            border: 2px solid black;
+        }
+
+        #container div {
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <b>Kittenji's $1 Meme Generator</b><br>
+        - Simple memes for my friends.
+    </div>
+
+    <div> <input type="file" id="image-input" accept="image/*"> </div>
+    <div> <textarea id="text-input"></textarea> </div>
+
+    <div id="container">
+        <canvas id="renderer" alt="Renderer." title="Left click to save."></canvas>
+        <div>Right click image to save</div>
+    </div>
+
+    <script>
+        canvas=document.getElementById("renderer"),ctx=canvas.getContext("2d"),container=document.getElementById("container"),tempData=document.createElement("a"),textInput=document.getElementById("text-input");textInput.addEventListener("input",OnInput);const imageInput=document.getElementById("image-input"),imageReader=new FileReader,imageData=new Image;function OnInput(t){Generator.Render()}function calculateAspectRatioFit(t,e,n,a){let i=Math.min(n/t,a/e);return{width:t*i,height:e*i}}function getLines(t,e){let n=[],a=t.split("\n");for(let t=0;t<a.length;t++){let i=a[t].split(" "),o=i[0];for(let t=1;t<i.length;t++){let a=i[t];ctx.measureText(o+" "+a).width<e?o+=" "+a:(n.push(o),o=a)}n.push(o)}return n}imageReader.onload=()=>{console.log("Passing Data Result..."),imageData.src=imageReader.result},imageData.onload=()=>{console.log(`Image Data Loaded: (W: ${imageData.width}, H: ${imageData.height})`),OnInput()},imageInput.onchange=()=>{console.log("Reading Image Data..."),imageInput.files&&imageInput.files.length&&imageReader.readAsDataURL(imageInput.files[0]),OnInput()},window.addEventListener("DOMContentLoaded",(()=>{console.log("Welcome."),imageInput.onchange()}));const Generator={center:{get x(){return canvas.width/2},get y(){return canvas.height/2}},limit:{w:720,h:720},margin:10,fontSize:42,fontName:"arial",get font(){return`${this.fontSize}px ${this.fontName}`},SetFont(){ctx.font=this.font,ctx.textBaseline="top"},watermark:{enabled:!1,fontSize:24,fontName:"arial",get font(){return`${this.fontSize}px ${this.fontName}`},style:{color:"white",stroke:"black",line:2},margin:10,contet:"1DollarMemeGenerator",Render(t){ctx.fillStyle=this.style.color,ctx.strokeStyle=this.style.stroke,ctx.lineWidth=2*this.style.line,ctx.font=this.font,ctx.textBaseline="bottom";const e=this.margin,n=canvas.height-this.margin;ctx.strokeText(this.contet,e,n),ctx.fillText(this.contet,e,n)}},Render(t){if(container.hidden=0==imageData.height)return;const e=calculateAspectRatioFit(imageData.width||this.limit.w,imageData.height,this.limit.w,this.limit.h);canvas.width=e.width,canvas.height=e.height,this.SetFont();let n=getLines(textInput.value,canvas.width-2*this.margin);const a=this.fontSize*n.length+2*this.margin;canvas.height+=a,ctx.fillStyle="white",ctx.fillRect(0,0,canvas.width,canvas.height),this.SetFont(),ctx.fillStyle="black",n.forEach(((t,e)=>ctx.fillText(t,this.margin,e*this.fontSize+this.margin))),ctx.drawImage(imageData,0,a,e.width,e.height),this.watermark.enabled&&this.watermark.Render()}};
+    </script>
+
+    <script>
+        const KAOMOJI_LIST = ["Ꙩ_Ꙩ","⨀_⨀","ꙩ_ꙩ","⨀_Ꙩ","Ꙫ_Ꙫ","ꙫ_ꙫ","ꙮ_ꙮ","⨂_⨂","Ꙩ⌵Ꙩ","(/◔ ◡ ◔)/","(¬_¬)","(¬_¬) ","(´・ω・｀)","(ʘ_ʘ)","(ʘ‿ʘ)","(ಠ_ಠ)","(ಠ‾ಠ﻿)","(ಠ‿ʘ)","(ಠ‿ಠ)","(ಠ益ಠ)","(ಥ_ಥ)","(๏̯͡๏ )","(╬ಠ益ಠ)","(◕_◕)","(◕‿◕)","(◣_◢)","(☞ﾟ ∀ﾟ )☞","(☼_☼)","(　・∀・)","@_@","\(ಠ ὡ ಠ )/","\(◕ ◡ ◕\).","¬_¬","¯\(º o)/¯","¯\(ºдಠ)/¯","°ω°","°Д°","Ò,ó","ŎםŎ","Σ ◕ ◡ ◕","Σ(ﾟДﾟ )","д_д","ф_ф","Ծ_Ծ","٩(͡๏̯ ͡๏)۶","٩(͡๏̯͡๏)۶","٩(ಥ_ಥ)۶","٩(•̮̮̃•̃)۶","٩(●̮̮̃•̃)۶","٩(●̮̮̃●̃)۶","٩๏̯͡๏)۶","இ_இ","ఠ_ఠ","ಠ_ಠ","ಠ¿ಠi","ಠ‿ಠ","ಠ▃ಠ","ಠ益ಠ","ಠ︵ಠ凸","ಡ_ಡ","ತ_ತ","ಥ_ಥ","ಥдಥ","ಥ﹏ಥ","ಭ_ಭ","ಸ_ಸ","ക_ക","อ_อ","อ้_อ้","๏_๏","๏̯͡๏","໖_໖","•▱•","ↁ_ↁ","⇎_⇎","≧ヮ≦","⊙ω⊙","⊙▂⊙","⊙△⊙","⊙︿⊙","⊙﹏⊙","⊙０⊙","┌( ಠ_ಠ)┘","┌( ಥ_ಥ)┘","┌∩┐(◕_◕)┌∩┐","╰☆╮","□_□","◉_◉","◉△◉","○_○","◔_◔","◔ᴗ◔","◕‿◕","◕◡◕","◪_◪","◮_◮","☆¸☆","☻_☻","♥◡♥","ヽ(´ｰ｀ )ﾉ","凸ಠ益ಠ)凸","흫_흫","句_句","（゜Д゜）","（ﾟ∀ﾟ）","｡◕‿‿◕｡"];
+        document.title = KAOMOJI_LIST[Date.now() % KAOMOJI_LIST.length];
+    </script>
+</body>
+</html>
